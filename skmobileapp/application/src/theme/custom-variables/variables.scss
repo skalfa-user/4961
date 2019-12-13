@@ -1,0 +1,73 @@
+// -- Custom theme variables --//
+
+$colors: (
+        primary:    #C47229,
+        secondary:  #FF005B,
+        light:      #fff,
+        dark:       #000,
+        green:      #03D848,
+        yellow:     #FBF6DB,
+
+        sk-page-bg: #EFF1F3,
+        sk-button-invisible: #CFD8E0,
+        sk-user-avatar-bg: #F0F2F3,
+);
+
+//Common styles
+$button-round-border-radius: 30px;
+$sk-search-input-bg: #EFEFEF;
+$sk-online-color: #7ED321;
+$sk-compatibility-bg: #C0BCBC; /* back bg of compatibility */
+$sk-compatibility-bar-bg:  #00C667;
+
+//Login page
+$sk-login-input-bg: transparent;
+$sk-login-input-fcolor: color($colors, light);
+$sk-login-input-placeholder: #989BA1;
+$sk-login-inline-signin: color($colors, primary);
+$sk-login-inline-btn-color: #898A89;
+$sk-login-inline-signup: color($colors, light);
+$sk-login-fb-label-color: color($colors, light);
+$sk-login-fb-border-color: rgba(216, 216, 216, 0.2);
+$sk-login-logo-width: 34vw;
+$sk-login-logo-height: auto;
+
+//Tabs
+$sk-tab-toggle-active-background: color($colors, primary);
+
+//Profile Tab 
+$sk-profile-button-bg: color($colors, primary);
+$sk-profile-button-delimiter-color: rgba(255, 255, 255, 0.15);
+$sk-profile-tab-name: color($colors, dark);
+$sk-profile-tab-about: #5E5E5E;
+$sk-guest-count: #E71F24;
+$sk-profile-link-border-color: #D5D7DB;
+$sk-profile-link: color($colors, primary);
+
+//Tinder Cards
+$sk-radar-start-color: #C47229;
+$sk-radar-end-color: #FFD9B7;
+
+//Profile view
+$sk-profile-slider-back: color($colors, primary);
+$sk-profile-slider-bullet: color($colors, primary);
+
+//Messages
+$sk-conversations-bg: #EFEFEF;
+$sk-conversation-item-descr: #707070;
+$sk-badge-new: #E71F24;
+$sk-message-sent-time-color: rgba(255, 255, 255, 0.5);
+$sk-messages-down-counter-bg: #02C441;
+
+$sk-messages-footer-promoted-bg: rgba(color($colors, primary), 0.8);
+$sk-messages-footer-promoted-button-bg: color($colors, primary);
+$sk-messages-footer-promoted-placeholder: rgba(255, 255, 255, 0.5);
+
+//It's a match
+$sk-match-gradient-start: #776B5F;
+$sk-match-gradient-end: #7D7572;
+$sk-match-title: color($colors, light);
+$sk-match-descr: color($colors, light);
+$sk-match-btn-border-color: color($colors, light);
+$sk-match-btn-color: color($colors, light);
+$sk-match-send-message-btn: color($colors, primary);

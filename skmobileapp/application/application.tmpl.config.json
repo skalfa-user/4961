@@ -1,0 +1,20 @@
+{
+  "id": "com.mixamore",
+  "version": "2.0.0",
+  "name": "Mix Amore",
+  "description": "Mix Amore - Interracial Dating",
+  "authorEmail": "iamgraceful@hotmail.com",
+  "authorName": "Graceful Grady",
+  "authorUrl": "https://mixamore.com",
+  "serverUrl": "https://mixamore.com",
+  "facebookAppId": "1210064532492908",
+  "googleProjectNumber": "160629840674",
+  "playStoreKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwnAGOll2Pe8xtFVYEaP9Bt3fHOpcPEUVjH0NrzHasfSxaDCFjbIbM4l4RsMRnkJYGN6tK0kPHhHH329CEUSyfFMkn700CmVUZdUzfe9aDcBh32hR00Pzjzq2VAxAtzet41BgknsqCceZ9kyGzm88Wv++YTNDbuPsE4F3nOtDI3396rM4e24X4nExBo24giC0alP0OWKIBhEyemF/7w9gTZvIgRzsIYtu9ogzLjJeOgscgEodre3vfAA3wdt39lBT97uUZRn5bgYLAB/DfJYy+n4zADhAIlEotFKHHq1lMGvpzt05+nPcI0l8q2AmvYLcJBxHMk3sWpBmZvkBAGg9twIDAQAB",
+  "pwaBackgroundColor": "#ffffff",
+  "pwaThemeColor": "#ffffff",
+  "pwaIcon": "assets/img/pwa_icon.png",
+  "pwaIconSize": "192x192",
+  "pwaIconType": "image/png",
+  "appleIcon": "assets/img/apple-touch-icon.png",
+  "appleIconSize": "180x180"
+}

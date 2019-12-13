@@ -1,0 +1,72 @@
+<div class="sk-profile-tab sk-navigation-tab sk-height-wrap">
+    <!-- page skeleton -->
+    <skeleton-preloader *ngIf="isDashboardLoading" name="profile-tab"></skeleton-preloader>
+
+    <!-- my profile wrapper -->
+    <ion-scroll *ngIf="!isDashboardLoading" scrollY="true" class="sk-height-wrap">
+        <div *ngIf="my$ | async as my" class="sk-user">
+            <!-- user avatar -->
+            <div class="sk-user-avatar">
+                <div class="sk-user-avatar-img">
+                    <user-avatar (tap)="showProfile()" isUseBigAvatar="false" [url]="my.avatar?.pendingUrl"></user-avatar>
+                    <div *ngIf="my.avatar?.id && !my.avatar?.active" class="sk-photo-pending" (tap)="showProfile()">
+                        <img src="./assets/img/ic-pending.svg" alt="" />
+                    </div>
+                </div>
+
+                <div class="sk-user-avatar-buttons">
+                    <!-- user settings -->
+                    <button  class="sk-user-profile" ion-button [navPush]="profileEditPage">
+                        <span class="sk-text-overflow">{{ 'profile_edit_profile' | translate }}</span>
+                    </button>
+                    <button class="sk-settings-button" ion-button [navPush]="appSettingsPage">
+                        <span class="sk-text-overflow">{{ 'profile_app_settings' | translate }}</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- user info -->
+            <div class="sk-user-info">
+                <span class="sk-name">
+                    {{ my.user.userName }}
+                </span>
+                <span class="sk-about">
+                    {{ my.user.aboutMe }}
+                </span>
+            </div>
+
+            <!-- installation guide -->
+            <button *ngIf="isInstallationGuideAllowed" class="sk-user-link-pwa-guide" ion-button clear (click)="showInstallationGuide()">
+                {{ 'pwa_installation_guide' | translate }}
+            </button>
+            <!-- extra pages -->
+            <div class="sk-user-links">
+                <!-- guests -->
+                <button *ngIf="siteConfigs.isPluginActive('ocsguests')" ion-button clear [navPush]="guestsPage">
+                    {{ 'profile_my_guests' | translate }}
+                    <span *ngIf="newGuestsCount$ | async as newGuestsCount" class="sk-guest-count">
+                        <span *ngIf="newGuestsCount <= 99">
+                            {{ newGuestsCount }}
+                        </span>
+                        <span *ngIf="newGuestsCount > 99">99+</span>
+                    </span>
+                </button>
+
+                <!-- bookmarks -->
+                <button *ngIf="siteConfigs.isPluginActive('bookmarks')" class="sk-bookmark-button" ion-button clear [navPush]="bookmarksPage">
+                    {{ 'profile_bookmarks' | translate }}
+                </button>
+
+                <!-- compatible users -->
+                <button *ngIf="siteConfigs.isPluginActive('matchmaking')" ion-button clear [navPush]="compatibleUsersPage">
+                    {{ 'profile_compatible_users' | translate }}
+                </button>
+
+                <!-- payments -->
+                <button *ngIf="payments.isPaymentsAvailable()" ion-button clear [navPush]="initialPaymentsPage">
+                    {{ 'profile_buy_upgrades' | translate }}
+                </button>
+            </div>
+        </div>
+    </ion-scroll>
+</div>

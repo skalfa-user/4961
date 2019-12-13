@@ -1,0 +1,154 @@
+.sk-profile-tab {
+    .sk-user {
+
+        .sk-user-avatar {
+            @include flex(flex, row, center, stretch);
+            position: relative;
+            height: 70vw;
+            width: 70vw;
+            margin: 2rem auto 0;
+            border-radius: $button-round-border-radius;
+            overflow: hidden;
+
+            .sk-user-avatar-img  {
+                position: relative;
+                width: 100%;
+                user-avatar {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 0;
+                        vertical-align: top;
+                    }
+                }
+    
+                .sk-photo-pending {
+                    top: 0;
+
+                    img {
+                        width: 10vh;
+                        height: 10vh;
+                    }
+                }          
+            }
+
+            .sk-user-avatar-buttons {
+                @include flex(flex, row, center, center);
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                button {
+                    border-radius: 0;
+                    height: 5rem;
+                    margin: 0;
+                    padding: 0 1.5rem;
+                    border-width: 2px;
+                    background-color: $sk-profile-button-bg;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    flex: 1;
+                    &:first-child {
+                        &:after {
+                            display: block;
+                            z-index: 6;
+                            position: absolute;
+                            bottom: 50%;
+                            transform: translateY(50%);
+                            @include position($top: null, $end: 0, $bottom: null, $start: null);
+                            background-color: $sk-profile-button-delimiter-color;
+                            content: " ";
+                            height: 3.5rem;
+                            width: 2px;
+                        }
+                    }
+                }
+            }
+            
+        }
+
+
+
+        .sk-user-info {
+            @include flex(flex, column, center, center);
+            padding: 4.7vh 2rem;
+
+            span {
+                max-width: 80%;
+                @include text-overflow;
+            }
+
+            .sk-name {
+                color: $sk-profile-tab-name;
+                font-size: 2rem;
+                margin-bottom: 0.3rem;
+                font-weight: 500;
+            }
+
+            .sk-about {
+                font-size: 1.8rem;
+                color: $sk-profile-tab-about;
+            }
+        }
+        .sk-user-link-pwa-guide {
+            font-weight: bold;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            height: 4.3rem;
+            width: 100%;
+            margin: 0;
+            background-color: $sk-user-link-pwa-bg;
+            color: $sk-user-link-pwa-color;
+            border-top: none;
+            border-radius: 0;
+        }
+
+        .sk-user-links {
+            @include flex(flex, row, flex-start, stretch);
+            flex-wrap: wrap;
+            border-bottom: 1px solid $sk-profile-link-border-color;
+
+            button {
+                height: 7rem;
+                border-top: 1px solid $sk-profile-link-border-color;
+                width: 50%;
+                margin: 0;
+                border-radius: 0;
+                color: $sk-profile-link;
+                font-weight: bold;
+                font-size: 1.4rem;
+                text-transform: uppercase;
+                &:nth-child(odd) {
+                    @include ltr() {
+                        border-right: 1px solid $sk-profile-link-border-color;
+                    }
+                    @include rtl() {
+                        border-left: 1px solid $sk-profile-link-border-color;
+                    }
+                }
+                &>span {
+                    display: inline;
+                    text-align: center;
+                    white-space: normal;
+                }
+            }
+        }
+    }
+
+    .sk-guest-count {
+        @include flex(inline-flex, row, center, center);
+        min-width: 22px;
+        width: 2.2rem;
+        height: 2.2rem;
+        @include margin(null, null, null, 8px);
+        font-weight: normal;
+        font-size: 1.2rem;
+        color: color($colors, light);
+        background-color: $sk-guest-count;
+        border-radius: 50%;
+    }
+}
