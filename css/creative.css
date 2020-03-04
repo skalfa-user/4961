@@ -505,3 +505,18 @@ footer a{
     min-height: 150px !important;
   }
 }
+
+/* Index links */
+.index-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.index-links a {
+  width: 23%;
+}
+.index-links a img {
+  width: 100%;
+  object-fit: contain;
+}
