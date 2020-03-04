@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+    <name>Twifometer and No avatar (#5835 by Skalfa)</name>
+    <key>sm</key>
+    <description>Twifometer and No avatar.</description>
+    <author>Skalfa</author>
+    <authorEmail>info@skadate.com</authorEmail>
+    <authorUrl>https://www.skadate.com</authorUrl>
+    <developerKey>99d6bdd5bb6468beaf118c4664dd92ff</developerKey>
+    <build>1</build>
+    <copyright>(C) 2019 Skalfa LLC. All rights reserved.</copyright>
+    <license>SEL</license>
+    <licenseUrl>http://www.skadate.com/sel.pdf</licenseUrl>
+</plugin>

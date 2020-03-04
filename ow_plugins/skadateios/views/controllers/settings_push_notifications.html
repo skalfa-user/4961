@@ -1,0 +1,59 @@
+{script}
+
+var enabled = $("#push-enabled");
+
+function refresh() {
+    $(".push-configs")[enabled.prop("checked") ? "show" : "hide"]();
+
+}
+
+refresh();
+enabled.click(refresh);
+
+{/script}
+
+{style}
+.push-configs {
+    display: none;
+}
+{/style}
+
+{$menu}
+
+{form name='skadateios_push'}
+<table class="ow_table_1 ow_form">
+    <tr class="ow_tr_first">
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_app">{text key='skadateios+push_notification_settings'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{label name='enabled'}</td>
+        <td class="ow_value">{input name='enabled'}</td>
+        <td class="ow_desc"></td>
+    </tr>
+
+    <tr class="ow_alt2 push-configs">
+        <td class="ow_label">{label name='mode'}</td>
+        <td class="ow_value">{input name='mode'}</td>
+        <td class="ow_desc"></td>
+    </tr>
+
+    <tr class="ow_alt1 push-configs">
+        <td class="ow_label">{label name='pem_file'}</td>
+        <td class="ow_value">
+            {input name='pem_file'}<br />{error name='pem_file'}
+        </td>
+        <td class="ow_desc">{desc name='pem_file'}</td>
+    </tr>
+
+    <tr class="ow_alt2 push-configs">
+        <td class="ow_label">{label name='pass_phrase'}</td>
+        <td class="ow_value">{input name='pass_phrase'}<br />{error name='pass_phrase'}</td>
+        <td class="ow_desc">{desc name='pass_phrase'}</td>
+    </tr>
+    <tr class="ow_alt2">
+        <td colspan="3" class="ow_center">{submit name='save'}</td>
+    </tr>
+</table>
+{/form}

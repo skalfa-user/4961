@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<prefix name="skandroid" label="Skadate Android App" language_tag="en" language_label="English">
+    <key name="push_provider_label">
+        <value>Notifications provider</value>
+    </key>
+    <key name="gmc_api_key_label">
+        <value>Server API Key</value>
+    </key>
+    <key name="firebase_warning">
+        <value>Do not use if your APP has been customized before 30th of September</value>
+    </key>
+</prefix>

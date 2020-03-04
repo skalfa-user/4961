@@ -1,0 +1,51 @@
+{$menu}
+
+{form name='configSaveForm'}
+    <table class="ow_table_1 ow_form">
+        <tr class="ow_tr_first">
+            <th class="ow_name ow_txtleft" colspan="3">
+                <span class="ow_section_icon ow_ic_script">{text key='skadateios+billing_settings'}</span>
+            </th>
+        </tr>
+        
+        <tr class="{cycle name="install" values="ow_alt1,ow_alt2"}">
+            <td class="ow_label">{text key='skadateios+settings_billing_enable_label'}</td>
+            <td class="ow_value">{input name='billing_enabled'} {error name='billing_enabled'}</td>
+            <td class="ow_desc">{text key='skadateios+settings_billing_enable_description'}</td>
+        </tr>
+        
+        <tr class="billing_enabled_settings {cycle name="install" values="ow_alt1,ow_alt2"} {if $billingEnabled}{else}ow_hidden{/if}">
+            <td class="ow_label">{text key='skadateios+settings_itunes_secret_label'}</td>
+            <td class="ow_value">{input name='itunes_secret'} {error name='itunes_secret'}</td>
+            <td class="ow_desc"></td>
+        </tr>
+        
+        <tr class="billing_enabled_settings {cycle name="install" values="ow_alt1,ow_alt2"} {if $billingEnabled}{else}ow_hidden{/if}">
+            <td class="ow_label">{text key='skadateios+settings_itunes_mode_label'}</td>
+            <td class="ow_value">{input name='itunes_mode'} {error name='itunes_mode'}</td>
+            <td class="ow_desc"></td>
+        </tr>
+
+    </table>
+
+    <table class="ow_table_1 ow_form">
+        <tr class="ow_tr_first">
+            <th class="ow_name ow_txtleft" colspan="3">
+                <span class="ow_section_icon ow_ic_script">{text key='skadateios+app_promo'}</span>
+            </th>
+        </tr>
+        <tr class="{cycle values='ow_alt1,ow_alt2'}">
+            <td class="ow_label">{label name='app_url'}</td>
+            <td class="ow_value">{input name='app_url'}<br />{error name='app_url'}</td>
+            <td class="ow_desc">{desc name='app_url'}</td>
+        </tr>
+        {*
+        <tr class="{cycle values='ow_alt1,ow_alt2'}">
+            <td class="ow_label">{label name='smart_banner'}</td>
+            <td class="ow_value">{input name='smart_banner'}<br />{error name='smart_banner'}</td>
+            <td class="ow_desc">{desc name='smart_banner'}</td>
+        </tr>*}
+    </table>
+    <div class="clearfix ow_stdmargin"><div class="ow_right">{submit name='save' class='ow_ic_save ow_positive'}</div></div>
+{/form}
+

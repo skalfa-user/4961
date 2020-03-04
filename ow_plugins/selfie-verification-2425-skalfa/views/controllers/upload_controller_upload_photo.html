@@ -1,0 +1,31 @@
+{form name='upload_photo_form'}
+<div class="ow_automargin">
+    <table class="ow_smallmargin ow_table_1 ow_form">
+        <tbody>
+        <tr class="ow_alt1 tr_qst_answer_type">
+            <td colspan="3">
+                <label><h2>{$reasonText}</h2></label>
+            </td>
+        </tr>
+
+        <tr class="ow_alt1 tr_qst_answer_type ">
+            <td class="ow_label">
+                <label>{text key='photver+photo_label'}</label>
+            </td>
+            <td  class="ow_value">
+                <span></span>
+                {input name='userIDPhoto'} {error name='userIDPhoto'}
+            </td>
+            <td class="ow_label">
+                <label>{text key='photver+photo_id_field_description'}</label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="clearfix">
+        <div class="ow_right">
+            {submit name="send" class="ow_right"}
+        </div>
+    </div>
+</div>
+{/form}

@@ -1,0 +1,15 @@
+<form id="{$formId}" method="post" action="{$fields.formActionUrl}">
+	<input type="hidden" name="clientAccnum" value="{$fields.clientAccnum}">
+	<input type="hidden" name="clientSubacc" value="{$fields.clientSubacc}">
+	<input type="hidden" name="formName" value="{$fields.formName}">
+	<input type="hidden" name="formPrice" value="{$sale->totalAmount}">
+	<input type="hidden" name="formPeriod" value="{$sale->period}">
+	{if $sale->recurring}
+	<input type="hidden" name="formRecurringPrice" value="{$sale->price}">
+	<input type="hidden" name="formRecurringPeriod" value="{$sale->period}">
+	<input type="hidden" name="formRebills" value="{$rebills}">
+	{/if}
+	<input type="hidden" name="currencyCode" value="{$currencyCode}">
+	<input type="hidden" name="formDigest" value="{$formDigest}">
+	<input type="hidden" name="custom" value="{$sale->hash}">
+</form>

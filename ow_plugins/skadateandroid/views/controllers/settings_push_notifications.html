@@ -1,0 +1,50 @@
+{script}
+
+var enabled = $("#push-enabled");
+
+function refresh() {
+    $(".push-configs")[enabled.prop("checked") ? "show" : "hide"]();
+
+}
+
+refresh();
+enabled.click(refresh);
+
+{/script}
+
+{style}
+.push-configs {
+    display: none;
+}
+{/style}
+
+{$menu}
+
+{form name='push'}
+<table class="ow_table_1 ow_form">
+    <tr class="ow_tr_first">
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_app">{text key='skandroid+push_notification_settings'}</span>
+        </th>
+    </tr>
+    <tr class="ow_alt1">
+        <td class="ow_label">{label name='enabled'}</td>
+        <td class="ow_value">{input name='enabled'}</td>
+        <td class="ow_desc"></td>
+    </tr>
+
+    <tr class="ow_alt2 push-configs">
+        <td class="ow_label">{label name='provider'}</td>
+        <td class="ow_value">{input name='provider'}</td>
+        <td class="ow_desc">{desc name='provider'}</td>
+    </tr>
+    <tr class="ow_alt1 push-configs">
+        <td class="ow_label">{label name='gmc_api_key'}</td>
+        <td class="ow_value">{input name='gmc_api_key'}<br />{error name='gmc_api_key'}</td>
+        <td class="ow_desc">{desc name='gmc_api_key'}</td>
+    </tr>
+    <tr class="ow_alt2">
+        <td colspan="3" class="ow_center">{submit name='save'}</td>
+    </tr>
+</table>
+{/form}

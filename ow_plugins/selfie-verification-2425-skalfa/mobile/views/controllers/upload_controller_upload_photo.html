@@ -1,0 +1,66 @@
+{style}
+
+.owm_join_photo_upload .owm_upload_photo_attach_wrap
+{
+padding:0px;
+}
+
+.owm_join_photo_button
+{
+position: absolute;
+top: 9px;
+left: 10px;
+}
+
+.for_hide
+{
+display:none;
+}
+
+.desc
+{
+margin-left: 1%;
+}
+
+.owm_join_photo_button_label
+{
+padding-left: 63px;
+margin-right: 8px;
+min-width:53px;
+float:left;
+}
+
+.owm_join_photo_button_img
+{
+min-width: 100px;
+float: left;
+}
+
+{/style}
+
+<div class="owm_join_form">
+    {form name='upload_photo_form'}
+
+    <div class="owm_padding">
+        <div class="owm_padding owm_info owm_std_margin_top">{$reasonText}</div>
+    </div>
+
+        <div id="mancheck_official_section" class="owm_field_container  owm_small_margin_bottom join_photo_upload owm_upload_photo_browse_wrap clearfix owm_bg_color_3  owm_field_wrap">
+            <div class="owm_join_photo_button">
+                <a class="owm_upload_photo_choose_btn" href="javascript://">{input name='userIDPhoto'} {error name='userIDPhoto'}</a>
+            </div>
+            <div class="owm_join_photo_button_label">
+                <span class="owm_upload_choose_label"><span ><label for="userIDPhoto" id='photoSpanID'>{text key='photver+photo_label'}</label></span></span>
+                <span class="owm_upload_replace_label"><span ><label for="userIDPhoto" id='photoSpanID_2'>{text key='photver+photos'}</label></span></span>
+            </div>
+            <div class="owm_join_photo_button_img">
+                <span class="owm_upload_img_name_label" style="display:none;"><img id="photo-file-prevew_off" style="height: 44px;"><span></span></span>
+            </div>
+        </div>
+
+        <div class="owm_btn_wide owm_std_margin_top">
+            <span class="ow_button"><span class=" ow_button ow_ic_submit">{submit name="send" class="ow_right"}</span></span>
+        </div>
+
+    {/form}
+</div>

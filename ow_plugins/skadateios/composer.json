@@ -1,0 +1,12 @@
+{
+    "name": "skadate/skadateios",
+    "authors": [
+        {
+            "name": "Sergey Kambalin",
+            "email": "greyexpert@gmail.com"
+        }
+    ],
+    "require": {
+        "apple/apn-push": "^2.2"
+    }
+}

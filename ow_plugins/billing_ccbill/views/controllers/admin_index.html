@@ -1,0 +1,108 @@
+{form name='ccbill-config-form'}
+
+<img src="{$logoUrl}" />
+
+<div class="ow_wide">
+<table class="ow_table_3">
+	<tr class="ow_tr_first">
+		<td class="ow_label">{text key='billingccbill+recurring_supported'}</td>
+		<td class="ow_value">{if $gateway->recurring}{text key='billingccbill+available'}{/if}</td>
+	</tr>
+	
+	<tr class="ow_tr_last">
+        <td class="ow_label">{text key='billingccbill+supported_currencies'}</td>
+        <td class="ow_value">{$gateway->getCurrenciesString()}</td>
+    </tr>
+</table>
+</div>
+
+{if !$currSupported}
+    <div class="ow_anno ow_std_margin ow_nocontent">{text key="base+billing_currency_not_supported" currency=$activeCurrency}</div>
+{/if}
+
+<table class="ow_table_1 ow_form">
+    <tr class="ow_tr_first">
+        <th class="ow_name ow_txtleft" colspan="3">
+            <span class="ow_section_icon ow_ic_gear_wheel">{text key='billingccbill+account_settings'}</span>
+        </th>
+    </tr>
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+account_number'}</td>
+        <td class="ow_value">
+            {input name='clientAccnum'} {error name='clientAccnum'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+subaccount_number'}</td>
+        <td class="ow_value">
+            {input name='clientSubacc'} {error name='clientSubacc'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    {if !empty($subAccounts)}
+    {foreach from=$subAccounts item='sub' key='key'}
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{$sub.label}</td>
+        <td class="ow_value">
+            {input name=$key} {error name=$key}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    {/foreach}
+    {/if}
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+cc_form_name'}</td>
+        <td class="ow_value">
+            {input name='ccFormName' class='ow_settings_input'} {error name='ccFormName'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+ck_form_name'}</td>
+        <td class="ow_value">
+            {input name='ckFormName' class='ow_settings_input'} {error name='ckFormName'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+dp_form_name'}</td>
+        <td class="ow_value">
+            {input name='dpFormName' class='ow_settings_input'} {error name='dpFormName'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+ed_form_name'}</td>
+        <td class="ow_value">
+            {input name='edFormName' class='ow_settings_input'} {error name='edFormName'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+salt'}</td>
+        <td class="ow_value">
+            {input name='dynamicPricingSalt'} {error name='dynamicPricingSalt'}
+        </td>
+        <td class="ow_desc ow_small">{text key='billingccbill+salt_desc'}</td>
+    </tr>
+    <tr class="{cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+datalink_username'}</td>
+        <td class="ow_value">
+            {input name='datalinkUsername'} {error name='datalinkUsername'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+    <tr class="ow_tr_last {cycle values='ow_alt1, ow_alt2'}">
+        <td class="ow_label ow_nowrap">{text key='billingccbill+datalink_password'}</td>
+        <td class="ow_value">
+            {input name='datalinkPassword'} {error name='datalinkPassword'}
+        </td>
+        <td class="ow_desc ow_small"></td>
+    </tr>
+</table>
+<div class="clearfix ow_stdmargin ow_submit">
+	<div class="ow_right">{submit name='save' class='ow_ic_save'}</div>
+</div>
+
+{/form}

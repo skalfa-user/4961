@@ -1,0 +1,52 @@
+[
+    {
+        "name": "apple/apn-push",
+        "version": "v2.2.2",
+        "version_normalized": "2.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ZhukV/AppleApnPush.git",
+            "reference": "d03a4d44e058fc7b308f5a317df78ae7e199f9a9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ZhukV/AppleApnPush/zipball/d03a4d44e058fc7b308f5a317df78ae7e199f9a9",
+            "reference": "d03a4d44e058fc7b308f5a317df78ae7e199f9a9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "monolog/monolog": "Use logger system",
+            "symfony/console": "Send push notifications from console",
+            "symfony/event-dispatcher": "Use events in apple apn push"
+        },
+        "time": "2015-11-11 11:38:38",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Apple\\ApnPush\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Vitaliy Zhuk",
+                "email": "zhuk2205@gmail.com"
+            }
+        ],
+        "description": "Push notifications to Apple devices",
+        "homepage": "https://github.com/ZhukV/AppleApnPush",
+        "keywords": [
+            "apn",
+            "apple",
+            "notifications",
+            "push"
+        ]
+    }
+]

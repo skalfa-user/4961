@@ -1,0 +1,12 @@
+{foreach from=$floatboxData item='fb'}
+<div class="ow_hidden" id="{$fb['floatboxId']}">
+    <>
+    <div class="ow_stdmargin ow_center">
+        <div class="ow_stdmargin">
+            {$fb['floatboxText']}
+        </div>
+        {decorator name="button" type="submit" id="{$fb['confirmId']}" class="ow_ic_ok ow_left" langLabel="base+yes"}
+        {decorator name="button" type="submit" id="{$fb['confirmId']}-no" class="ow_ic_delete ow_left" langLabel="base+no"}
+    </div>
+</div>
+{/foreach}

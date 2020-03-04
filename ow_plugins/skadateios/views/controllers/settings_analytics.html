@@ -1,0 +1,17 @@
+{$menu}
+
+{form name='analyticsSettings'}
+    <table class="ow_table_1 ow_form">
+        <tr class="ow_alt1">
+            <td class="ow_label">{label name='flurry_api_key'}</td>
+            <td class="ow_value">
+                {input name='flurry_api_key'}<br />
+                {error name='flurry_api_key'}
+            </td>
+            <td class="ow_desc">{desc name='flurry_api_key'}</td>
+        </tr>
+        <tr class="ow_alt2">
+            <td colspan="3" class="ow_center">{submit name='save' class='ow_ic_save ow_positive'}</td>
+        </tr>
+    </table>
+{/form}

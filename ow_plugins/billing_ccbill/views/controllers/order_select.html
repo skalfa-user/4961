@@ -1,0 +1,19 @@
+<div class="ow_narrow">
+    
+    {block_decorator name='box' iconClass='ow_ic_dashboard' langLabel='billingccbill+select_payment_option'}
+	    <form method="post">
+	        <div class="ow_smallmargin">
+	        {if $cc != ''}<label><input type="radio" name="type" value="cc" checked="checked" />{text key='billingccbill+payment_option_cc'}</label><br />{/if}
+	        {if $ck != ''}<label><input type="radio" name="type" value="ck" />{text key='billingccbill+payment_option_ck'}</label><br />{/if}
+	        {if $dp != ''}<label><input type="radio" name="type" value="dp" />{text key='billingccbill+payment_option_dp'}</label><br />{/if}
+	        {if $ed != ''}<label><input type="radio" name="type" value="ed" />{text key='billingccbill+payment_option_ed'}</label><br />{/if}
+	        </div>
+			<div class="clearfix ow_smallmargin">
+            <div class="ow_right">
+               {decorator name="button" class="ow_positive" type="submit" langLabel="billingccbill+continue"}
+            </div>
+            </div>
+    	</form>
+    {/block_decorator}
+
+</div>

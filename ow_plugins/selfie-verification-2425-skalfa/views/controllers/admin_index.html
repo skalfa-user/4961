@@ -1,0 +1,81 @@
+{if $users}
+
+<div class="clearfix ow_smallmargin">
+    <div class="ow_left">
+        {$paging}
+    </div>
+
+    {if $total}
+    <div class="ow_right">
+        {text key='admin+found_users' count=$total}
+    </div>
+    {/if}
+</div>
+
+{form name='approval_form'}
+<table class="ow_table_2">
+    <tr class="ow_tr_first">
+        <th width="1"></th>
+        <th>{text key='photver+photo_verification_label'}</th>
+        <th></th>
+    </tr>
+    {foreach from=$users item='user'}
+    {capture assign='userId'}{$user->id}{/capture}
+    {capture assign='username'}{$userNameList[$userId]}{/capture}
+    <tr class="{cycle values='ow_alt1,ow_alt2'}">
+        <td>
+            <input type="checkbox" value="{$user->id}" name="{$checkboxName}[{$user->id}]" style="visibility: hidden" />
+        </td>
+        <td>
+            <div class="clearfix" style="position: relative">
+                <div class="ow_left ow_txtleft user_list_thumb">
+                    <div class="ow_avatar{if !empty($avatars[$userId].class)} {$avatars[$userId].class}{/if}">
+                        {if !empty($avatars[$userId].isMarked)}<div class="ow_ic_bookmark ow_bookmark_icon"></div>{/if}
+                        {if !empty($avatars[$userId].url)}
+                        <a href="{$avatars[$userId].url}"><img {if !empty($avatars[$userId].title)} alt="{$avatars[$userId].title|escape}" title="{$avatars[$userId].title|escape}"{/if} {if !empty($avatars[$userId].attrs)}{$avatars[$userId].attrs}{/if} src="{$avatars[$userId].src}" /></a>
+                        {else}
+                        <img {if !empty($avatars[$userId].title)} alt="{$avatars[$userId].title|escape}" title="{$avatars[$userId].title|escape}"{/if} {if !empty($avatars[$userId].attrs)}{$avatars[$userId].attrs}{/if} src="{$avatars[$userId].src}" />
+                        {/if}
+                        {if !empty($avatars[$userId].label)}<span class="ow_avatar_label"{if !empty($avatars[$userId].labelColor)} style="background-color: {$avatars[$userId].labelColor}"{/if}>{$avatars[$userId].label}</span>{/if}
+                        {if isset($userIconClassMatches[$userId].userList) }
+                        <span class="{$userIconClassMatches[$userId].userList}" {if !empty($userTitleMatches[$userId])} title="{$userTitleMatches[$userId]}" {/if}></span>
+                        {/if}
+                    </div>
+
+                </div>
+                <div class="ow_left ow_txtleft">
+                    {user_link name=$avatars[$userId].title username=$userNameList[$userId]}
+                    <br />
+                    <a href="{$user->photoHash}" onClick="window.open('{$user->photoHash}', '_blank'); return false;">
+                        <img style="width: 200px;" src="{$user->photoHash}" />
+                    </a>
+                </div>
+
+                <div style="position: absolute; right: 0; bottom: 0">
+                    <b>{text key='photver+added_label'}: </b>
+                    <span class="ow_remark">{format_date timestamp=$user->updateStamp}</span>
+                </div>
+            </div>
+        </td>
+        <td class="ow_small">
+            {foreach from=$buttons item='btn'}
+            <div>
+                {decorator name='button_list_item' type='submit' buttonName=$btn.name label=$btn.label id=$btn.id class=$btn.class}
+            </div>
+            {/foreach}
+        </td>
+    </tr>
+    {/foreach}
+</table>
+
+{$adminConfirmFloatbox}
+{$adminDeclineFloatbox}
+{/form}
+
+{$paging}
+
+{else}
+{block_decorator name='box' addClass='ow_stdmargin clearfix ow_italic ow_center'}
+{text key='photver+no_users_found'}
+{/block_decorator}
+{/if}

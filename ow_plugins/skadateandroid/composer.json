@@ -1,0 +1,8 @@
+{
+    "require": {
+        "php-gcm/php-gcm": "dev-master",
+        "firebase/php-jwt": "^4.0",
+        "curl/curl": "^1.4",
+        "sngrl/php-firebase-cloud-messaging": "dev-master"
+    }
+}
