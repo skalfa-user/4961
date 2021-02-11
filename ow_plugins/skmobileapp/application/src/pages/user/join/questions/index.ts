@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy }  from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ToastController, NavParams, NavController, ModalController } from 'ionic-angular';
+import {ToastController, NavParams, NavController, ModalController, AlertController} from 'ionic-angular';
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from 'ng2-translate';
 
@@ -21,6 +21,7 @@ import { QuestionControlService } from 'services/questions/control.service';
 
 // shared components
 import { CustomPageComponent } from 'shared/components/custom-page';
+import {IFileUploadResult} from "shared/components/file-uploader";
 
 @Component({
     selector: 'join-questions',
@@ -41,18 +42,26 @@ export class JoinQuestionsPage extends BaseFormBasedPage implements OnInit, OnDe
     sections: any = [];
     tosValue: boolean = false;
 
+    verifyPhotoUrl: string = null;
+    isPhotoUploadIng: boolean = false;
+    photoUploadUri = '/verify-photo';
+
     private initialData: IUserData;
     private currentGender: number;
     private siteConfigsSubscription: ISubscription;
+
+    private isPhotoUploaded: boolean = false;
+    private photoKey: string = null;
 
     /**
      * Constructor
      */
     constructor(
         public questionControl: QuestionControlService,
+        public siteConfigs: SiteConfigsService,
         protected toast: ToastController,
-        protected siteConfigs: SiteConfigsService,
         protected translate: TranslateService,
+        private alert: AlertController,
         private auth: AuthService,
         private user: UserService,
         private ref: ChangeDetectorRef,
@@ -176,10 +185,59 @@ export class JoinQuestionsPage extends BaseFormBasedPage implements OnInit, OnDe
     }
 
     /**
+     * Is photo valid
+     */
+    get isPhotoValid(): boolean {
+        return this.isPhotoUploaded && !this.isPhotoUploadIng;
+    }
+
+    /**
+     * Start uploading phpto callback
+     */
+    startUploadingPhotoCallback(): void {
+        this.isPhotoUploadIng = true;
+        this.ref.markForCheck();
+    }
+
+    /**
+     * Success photo upload callback
+     */
+    successPhotoUploadCallback(response: IFileUploadResult): void {
+        this.verifyPhotoUrl = response.data.url;
+        this.photoKey = response.data.key;
+
+        this.isPhotoUploaded = true;
+        this.isPhotoUploadIng = false;
+        this.ref.markForCheck();
+    }
+
+    /**
+     * Error photo upload callback
+     */
+    errorPhotoUploadCallback(): void {
+        this.isPhotoUploadIng = false;
+        this.ref.markForCheck();
+
+        const alert = this.alert.create({
+            title: this.translate.instant('error_occurred'),
+            subTitle: this.translate.instant('error_uploading_file'),
+            buttons: [this.translate.instant('ok')]
+        });
+
+        alert.present();
+    }
+
+    /**
      * Submit form
      */
     submit(): void {
         // is form valid
+        if (this.siteConfigs.isPluginActive('photver') && !this.isPhotoValid) {
+            this.showNotification('verify_photo_input_error');
+
+            return;
+        }
+
         if (!this.form.valid || !this.isTosValid) {
             // tos is not selected
             if (this.form.valid && !this.isTosValid) {
@@ -224,6 +282,14 @@ export class JoinQuestionsPage extends BaseFormBasedPage implements OnInit, OnDe
                 value: this.initialData.lookingFor,
                 type: QuestionManager.TYPE_MULTICHECKBOX
             });
+
+            if (this.siteConfigs.isPluginActive('photver')) {
+                // add verify photo key
+                processedQuestions.push({
+                    name: 'verify_photo_key',
+                    value: this.photoKey,
+                });
+            }
 
             this.user.createQuestionsData(processedQuestions).subscribe(() => {
                 this.nav.setRoot(DashboardPage);

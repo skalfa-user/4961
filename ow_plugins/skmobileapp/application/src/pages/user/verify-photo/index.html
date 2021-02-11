@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            {{ 'verify_photo_page_header' | translate }}
+        </ion-title>
+        <ion-buttons end>
+            <button *ngIf="!isPageLoading" class="sk-join-initial-button" ion-button clear [disabled]="isPhotoUploadIng" (click)="submit()">
+                {{ 'done' | translate }}
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="sk-join-initial-page">
+
+    <!-- photo load -->
+    <div>
+        <div class="sk-decline-text">{{declineText}}</div>
+        <ion-list class="sk-join-fields">
+            <div class="sk-question-list-wrap">
+                <!-- photo -->
+                <div class="sk-avatar-wrapper" (click)="photoUploader.showFileChooser()">
+                    <div *ngIf="verifyPhotoUrl" class="{{ isPhotoValid || isPhotoUploadIng ? 'sk-add-photo' : 'sk-add-photo sk-avatar-warning' }}" [style.background-image]="'url(' + verifyPhotoUrl + ')'">
+                        <ion-spinner *ngIf="isPhotoUploadIng" name="ios-small"></ion-spinner>
+                    </div>
+                    <div *ngIf="!verifyPhotoUrl" class="{{ isPhotoValid || isPhotoUploadIng ? 'sk-add-photo' : 'sk-add-photo sk-avatar-warning' }}">
+                        <ion-icon *ngIf="!isPhotoUploadIng" class="sk-add-avatar-icon" name="md-add"></ion-icon>
+                        <ion-label *ngIf="!isPhotoUploadIng">
+                                <span>
+                                    {{ 'choose_verify_photo' | translate }}
+                                </span>
+                        </ion-label>
+                        <ion-spinner *ngIf="isPhotoUploadIng" name="ios-small"></ion-spinner>
+                    </div>
+                </div>
+
+                <!-- file uploader -->
+                <file-uploader
+                    class="sk-avatar-uploader"
+                    #photoUploader
+                    [uri]="photoUploadUri"
+                    isBroadcastError="false"
+                    acceptMask="image/*"
+                    [mimeTypes]="getAvatarMimeTypes"
+                    [maxFileSize]="getAvatarMaxSize"
+                    (startUploading)="startUploadingPhotoCallback($event)"
+                    (uploaded)="successPhotoUploadCallback($event)"
+                    (uploadError)="errorPhotoUploadCallback($event)">
+                </file-uploader>
+
+            </div>
+        </ion-list>
+    </div>
+</ion-content>

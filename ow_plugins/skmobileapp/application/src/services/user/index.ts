@@ -488,4 +488,14 @@ export class UserService {
     updateEmailNotificationsQuestions(questions: Array<IQuestionData>): Observable<any> {
         return this.http.put('/email-notifications/me', questions);
     }
+
+    /**
+     * Send verify photo
+     */
+    sendVerifyPhoto(key: string): Observable<any> {
+        return this.http.post('/verify-photo/post-photo', {
+            id: this.getMe().user.id,
+            key: key
+        });
+    }
 }

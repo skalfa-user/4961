@@ -49,6 +49,7 @@ use Skadate\Mobile\Controller\MobileBilling as MobileBillingController;
 use Skadate\Mobile\Controller\WebPushes as WebPushesController;
 use Skadate\Mobile\Controller\Preferences as PreferencesController;
 use Skadate\Mobile\Controller\EmailNotifications as EmailNotificationsController;
+use Skadate\Mobile\Controller\VerifyPhoto as VerifyPhoto;
 
 /**
  * Copyright (c) 2016, Skalfa LLC
@@ -111,7 +112,8 @@ class SKMOBILEAPP_CTRL_Api extends OW_ActionController
             'location-autocomplete',
             'server-events',
             'logs',
-            'web-pushes'
+            'web-pushes',
+            'verify-photo'
         ];
 
         $app['security.firewalls'] = [
@@ -121,6 +123,10 @@ class SKMOBILEAPP_CTRL_Api extends OW_ActionController
             ],
             'avatars' => [
                 'pattern' => new RequestMatcher('/avatars/$', null, ['POST']), // anonymous can create avatar only
+                'anonymous' => true
+            ],
+            'verify-photo' => [
+                'pattern' => new RequestMatcher('/verify-photo/$', null, ['POST']), // anonymous can create photo only
                 'anonymous' => true
             ],
             'users' => [
@@ -225,6 +231,7 @@ class SKMOBILEAPP_CTRL_Api extends OW_ActionController
         $app->mount('/web-pushes', new WebPushesController);
         $app->mount('/preferences', new PreferencesController);
         $app->mount('/email-notifications', new EmailNotificationsController);
+        $app->mount('/verify-photo', new VerifyPhoto);
 
         $app->run();
 

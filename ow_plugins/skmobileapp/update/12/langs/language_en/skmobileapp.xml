@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<prefix name="skmobileapp" label="Skadate Mobile APP" language_tag="en" language_label="English">
+    <key name="choose_verify_photo"><value>Verification photo</value></key>
+    <key name="check_selfie"><value>For selfie verification please match the pose, holding up your pinky finger</value></key>
+    <key name="verify_photo_page_header"><value>Confirm your photo</value></key>
+</prefix>

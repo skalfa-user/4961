@@ -21,6 +21,7 @@ class PHOTVER_BOL_Service
     const PLUGIN_KEY = 'photver';
     const PHOTO_VERIFICATION_CONTROL_NAME = 'userIDPhoto';
     const IMAGE_PREFIX = 'photo_';
+    const IMAGE_TMP_PREFIX = 'photo_tmp_';
 
     const EVENT_ON_PENDING_APPROVE = 'memberverification.on_pending_approve';
     const EVENT_ON_AFTER_APPROVE = 'memberverification.on_after_approve';
@@ -91,6 +92,18 @@ class PHOTVER_BOL_Service
         $example->andFieldIsNotNull('photoHash');
 
         return $this->verificationDao->countByExample($example) != 0 ? true : false;
+    }
+
+    public function markVerificationPhotoStepApp( $userId, $key )
+    {
+        $filePath = $this->getPhotoTmpDir() . $key . '.jpg';
+
+        if (file_exists($filePath))
+        {
+            $this->markVerificationPhotoStep($userId, $filePath);
+
+            @unlink($filePath);
+        }
     }
 
     public function markVerificationPhotoStep( $userId, $photoTempPath )
@@ -229,5 +242,69 @@ class PHOTVER_BOL_Service
         return $this->userDao->countByExample($example) != 0 ? true : false;
     }
 
+    public function getPhotoTmpDir()
+    {
+        $userFilesTmpDir = OW::getPluginManager()->getPlugin(self::PLUGIN_KEY)->getUserFilesDir() . 'tmp' . DS;
+
+        if ( !dir($userFilesTmpDir) )
+        {
+            @mkdir($userFilesTmpDir);
+            chmod($userFilesTmpDir, 0777);
+        }
+
+        return $userFilesTmpDir;
+    }
+
+    public function saveTmpPhoto($file)
+    {
+        $fileKey = self::IMAGE_TMP_PREFIX . uniqid();
+        $fileName = $fileKey . '.jpg';
+
+        $tmpPath = $this->getPhotoTmpDir() . $fileName;
+
+        if ( move_uploaded_file($file, $tmpPath) )
+        {
+            $img = new UTIL_Image($tmpPath);
+            $img->orientateImage()->saveImage();
+
+
+
+            return [
+                'url' => $url = OW::getPluginManager()->getPlugin(self::PLUGIN_KEY)->getUserFilesUrl() . '/tmp/' . $fileName,
+                'key' => $fileKey
+            ];
+        }
+
+        return [];
+    }
+
+    /**
+     * Delete temp verify photos
+     */
+    public function deleteTempPhotos( )
+    {
+        $path = OW::getPluginManager()->getPlugin('photver')->getUserFilesDir() . 'tmp' . DS;
+
+        if ( $handle = opendir($path) )
+        {
+            while ( false !== ($file = readdir($handle)) )
+            {
+                if ( !is_file($path.$file) )
+                {
+                    continue;
+                }
+
+                if ( time() - filemtime($path.$file) >= 60*60*24 )
+                {
+                    if ( !preg_match('/\.jpg$/i', $file) )
+                    {
+                        continue;
+                    }
+
+                    @unlink($path.$file);
+                }
+            }
+        }
+    }
 
 }

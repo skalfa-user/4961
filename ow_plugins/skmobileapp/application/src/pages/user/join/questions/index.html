@@ -49,6 +49,49 @@
                         </ion-item>
                     </div>
                 </div>
+
+                <!-- photver -->
+                <ng-container *ngIf="siteConfigs.isPluginActive('photver')">
+
+                    <div class="sk-photver-wrapper">
+                        <ion-label class="sk-photver-label">{{ 'check_selfie' | translate }}</ion-label>
+                    </div>
+
+                    <div class="sk-avatar-wrapper sk-example-photo-wrapper">
+                        <!--<img src="./assets/img/custom-images/men-with-finger.jpg" alt="">-->
+                        <div class="sk-example-photo"></div>
+                    </div>
+                    
+                    <div class="sk-avatar-wrapper" (click)="verifyFileUploader.showFileChooser()">
+                        <div *ngIf="verifyPhotoUrl" class="{{ isPhotoValid || isPhotoUploadIng ? 'sk-add-photo' : 'sk-add-photo sk-avatar-warning' }}" [style.background-image]="'url(' + verifyPhotoUrl + ')'">
+                            <ion-spinner *ngIf="isPhotoUploadIng" name="ios-small"></ion-spinner>
+                        </div>
+                        <div *ngIf="!verifyPhotoUrl" class="{{ isPhotoValid || isPhotoUploadIng ? 'sk-add-photo' : 'sk-add-photo sk-avatar-warning' }}">
+                            <ion-icon *ngIf="!isPhotoUploadIng" class="sk-add-avatar-icon" name="md-add"></ion-icon>
+                            <ion-label *ngIf="!isPhotoUploadIng">
+                                <span>
+                                    {{ 'choose_verify_photo' | translate }}
+                                </span>
+                            </ion-label>
+                            <ion-spinner *ngIf="isPhotoUploadIng" name="ios-small"></ion-spinner>
+                        </div>
+                    </div>
+
+                    <!-- file uploader -->
+                    <file-uploader
+                            class="sk-avatar-uploader"
+                            #verifyFileUploader
+                            [uri]="photoUploadUri"
+                            isBroadcastError="false"
+                            acceptMask="image/*"
+                            [mimeTypes]="getAvatarMimeTypes"
+                            [maxFileSize]="getAvatarMaxSize"
+                            (startUploading)="startUploadingPhotoCallback($event)"
+                            (uploaded)="successPhotoUploadCallback($event)"
+                            (uploadError)="errorPhotoUploadCallback($event)">
+                    </file-uploader>
+                </ng-container>
+
             </div>
         </ion-list>
     </form>

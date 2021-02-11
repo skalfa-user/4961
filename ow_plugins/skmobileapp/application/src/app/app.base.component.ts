@@ -11,6 +11,7 @@ import { AppNoInternetPage } from 'pages/app-no-internet';
 import { AppErrorPage } from 'pages/app-error';
 import { LoginPage } from 'pages/user/login';
 import { UserDisapprovedPage } from 'pages/user/disapproved';
+import { VerifyPhotoPage } from 'pages/user/verify-photo';
 import { VerifyEmailCheckCodePage } from 'pages/user/verify-email/check-code';
 import { CompleteProfilePage } from 'pages/user/complete-profile'
 import { CompleteAccountTypePage } from 'pages/user/complete-account-type'
@@ -23,6 +24,7 @@ export abstract class BaseApp {
     public static readonly HTTP_ERROR_FORBIDDEN: number = 403;
 
     // forbidden types
+    public static readonly HTTP_ERROR_FORBIDDEN_VERIFY_PHOTO_DISAPPROVED: string = 'photoDisapproved';
     public static readonly HTTP_ERROR_FORBIDDEN_DISAPPROVED: string = 'disapproved';
     public static readonly HTTP_ERROR_FORBIDDEN_SUSPENDED: string = 'suspended';
     public static readonly HTTP_ERROR_FORBIDDEN_EMAIL_NOT_VERIFIED: string = 'emailNotVerified';
@@ -71,6 +73,13 @@ export abstract class BaseApp {
                     case BaseApp.HTTP_ERROR_FORBIDDEN_DISAPPROVED :
                         this.ionicApp.getRootNav().setRoot(UserDisapprovedPage, {
                             status: 'disapproved',
+                        });
+
+                        break;
+
+                    case BaseApp.HTTP_ERROR_FORBIDDEN_VERIFY_PHOTO_DISAPPROVED :
+                        this.ionicApp.getRootNav().setRoot(VerifyPhotoPage, {
+                            disapprovedText: error.shortDescription,
                         });
 
                         break;

@@ -1,5 +1,63 @@
 .sk-join-questions-page {
     background-color: color($colors, sk-page-bg);
+
+    .sk-join-fields {
+        .sk-add-photo {
+            width: 30vh;
+            height: 30vh;
+            min-height: 196px;
+            min-width: 196px;
+            @include flex(flex, column, center, center);
+            border: 2px solid $sk-join-initial-avatar;
+            border-radius: 10px;
+            color: $sk-join-initial-avatar;
+            font-size: 2rem;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            @include margin(6rem auto 4rem auto);
+
+            ion-label {
+                flex: none;
+            }
+
+            .icon {
+                @include margin(null 1.5rem null null);
+                font-size: 4.2rem;
+            }
+        }
+
+        .sk-example-photo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .sk-example-photo {
+                width: 30vh;
+                height: 30vh;
+                background-image: url("../assets/img/custom-images/men-with-finger.jpg");
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                border: 2px solid #BBBBBB;
+                border-radius: 10px;
+                margin-top: 60px;
+            }
+        }
+
+        .sk-photver-wrapper {
+            .sk-photver-label {
+                font-size: 1.3rem;
+                font-weight: 500;
+                color: #6D6D72;
+                padding-left: 16px;
+                white-space: pre-line;
+                text-transform: uppercase;
+            }
+        }
+
+    }
+
     .sk-tos {
         button {
             padding: 0;

@@ -19,6 +19,7 @@ use OW;
 use BOL_User;
 use BOL_PreferenceService;
 use BOL_QuestionService;
+use PHOTVER_BOL_Service;
 
 class UserStatus extends Base
 {
@@ -183,6 +184,26 @@ class UserStatus extends Base
                         'Content-Type' => 'application/json'
                     ]);
                 }
+
+                if ($this->isNotVerifyPhoto()) {
+                    return new Response(json_encode([
+                        'type' => 'disapproved',
+                        'shortDescription' => OW::getLanguage()->text('skmobileapp', 'profile_disapproved_error'),
+                    ]), Response::HTTP_FORBIDDEN, [
+                        'Content-Type' => 'application/json'
+                    ]);
+                }
+
+                if ($this->isDisapprovedVerifyPhoto()) {
+                    $text = PHOTVER_BOL_Service::getInstance()->findDeclineReason($this->getUser()->getId());
+
+                    return new Response(json_encode([
+                        'type' => 'photoDisapproved',
+                        'shortDescription' => $text,
+                    ]), Response::HTTP_FORBIDDEN, [
+                        'Content-Type' => 'application/json'
+                    ]);
+                }
             }
         };
     }
@@ -246,6 +267,58 @@ class UserStatus extends Base
     {
         if ($this->getUser()) {
             return !$this->userService->isApproved($this->getUser()->getId());
+        }
+
+        return false;
+    }
+
+    /**
+     * Is verify photo
+     *
+     * @return boolean
+     */
+    protected function isNotVerifyPhoto()
+    {
+        if (OW::getPluginManager()->isPluginActive('photver'))
+        {
+            $photoVerService = PHOTVER_BOL_Service::getInstance();
+
+            if ($this->getUser()) {
+                $userId = $this->getUser()->getId();
+
+                $isUserVerified = $photoVerService->isUserVerified($userId);
+
+                if (!$isUserVerified && $photoVerService->haveUserPassedSecondVerificationStep($userId))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Is disapproved verify photo
+     *
+     * @return boolean
+     */
+    protected function isDisapprovedVerifyPhoto()
+    {
+        if (OW::getPluginManager()->isPluginActive('photver'))
+        {
+            $photoVerService = PHOTVER_BOL_Service::getInstance();
+
+            if ($this->getUser()) {
+                $userId = $this->getUser()->getId();
+
+                $isUserVerified = $photoVerService->isUserVerified($userId);
+
+                if (!$isUserVerified && $photoVerService->findDeclineReason($userId))
+                {
+                    return true;
+                }
+            }
         }
 
         return false;

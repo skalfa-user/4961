@@ -35,6 +35,7 @@ import { GdprUserDataPage } from 'pages/app-settings/gdpr/gdpr-user-data';
 import { GdprThirdPartyPage } from 'pages/app-settings/gdpr/gdpr-third-party';
 import { EmailNotificationsPage } from 'pages/app-settings/email-notifications';
 import { PreferencesPage } from 'pages/app-settings/preferences';
+import { VerifyPhotoPage } from 'pages/user/verify-photo';
 
 // page components
 import { ProfileComponent } from 'pages/dashboard/components/profile';
@@ -110,7 +111,8 @@ export const declarationsList = [
     GdprMessageComponent,
     MembershipsComponent,
     InappCreditsComponent,
-    MobileCreditsComponent
+    MobileCreditsComponent,
+    VerifyPhotoPage
 ];
 
 export const entryComponents = [
@@ -157,5 +159,6 @@ export const entryComponents = [
     GdprMessageComponent,
     VideoImConfirmationComponent,
     VideoImChatComponent,
-    UserSearchFilterComponent
+    UserSearchFilterComponent,
+    VerifyPhotoPage
 ];

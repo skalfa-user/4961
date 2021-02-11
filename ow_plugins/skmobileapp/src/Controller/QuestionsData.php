@@ -17,6 +17,7 @@ use BOL_QuestionService;
 use OW_Event;
 use OW_EventManager;
 use OW;
+use PHOTVER_BOL_Service;
 
 class QuestionsData extends Base
 {
@@ -65,6 +66,27 @@ class QuestionsData extends Base
         // create questions
         $controllers->post('/', function(Request $request) use ($app) {
             $questions = json_decode($request->getContent(), true);
+
+            // process verify photo
+            if(OW::getPluginManager()->isPluginActive('photver'))
+            {
+                foreach ($questions as $index => $data)
+                {
+                    if ($data['name'] === 'verify_photo_key')
+                    {
+                        PHOTVER_BOL_Service::getInstance()->markVerificationPhotoStepApp(
+                            $app['users']->getLoggedUserId(),
+                            $data['value']
+                        );
+
+                        PHOTVER_BOL_Service::getInstance()->deleteDeclineReason($app['users']->getLoggedUserId());
+
+                        // unset verify photo question
+                        unset($questions[$index]);
+                    }
+                }
+            }
+
             $this->updateQuestions($app['users']->getLoggedUserId(), $questions);
 
             return $app->json(

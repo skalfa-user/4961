@@ -49,7 +49,7 @@ class PHOTVER_CLASS_EventHandler
         $eventManager = OW::getEventManager();
         $eventManager->bind('class.get_instance.SKADATE_CTRL_Join', array($this, 'onSKADATE_CTRL_JoinInstance'));
 
-        //$eventManager->bind(OW_EventManager::ON_AFTER_ROUTE, array($this, 'onAfterRoute')); // uncomment if you are using desktop version also
+        $eventManager->bind(OW_EventManager::ON_AFTER_ROUTE, array($this, 'onAfterRoute')); // uncomment if you are using desktop version also
         $this->genericInit();
     }
 
