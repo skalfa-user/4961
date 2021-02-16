@@ -47,7 +47,7 @@ class VerifyPhoto extends Base
             }
 
             // validate photo
-            if (! PHOTVER_BOL_Service::getInstance()->isAvatarValid($_FILES['file']['type'], $_FILES['file']['size']))
+            if (!$this->service->isAvatarValid($_FILES['file']['type'], $_FILES['file']['size']))
             {
                 throw new BadRequestHttpException('File has wrong format or big size');
             }
